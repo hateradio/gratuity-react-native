@@ -21,11 +21,7 @@ export default class App extends React.Component {
         <BaseTotal onChangeText={this.onInput} value={`${this.state.baseTotal}`}></BaseTotal>
         <TipSlider onValueChange={this.onSlider} tip={this.state.tipAmount} />
 
-        <View style={{
-          flexDirection: 'row',
-          width: '80%',
-          borderColor: '#eee', borderWidth: 1
-        }}>
+        <View style={styles.estimateContainer}>
 
           <Estimate name="Gratuity" value={this.state.calculatedGratuity} />
           <Estimate name="Total" value={this.state.calculatedTotal} />
@@ -36,23 +32,23 @@ export default class App extends React.Component {
   }
 
   static round(num) {
-    return Math.round(num * 100) / 100
+    return !isNaN(+num) ? Math.round(num * 100) / 100 : 0
   }
 
   calculate() {
     const { baseTotal, tipAmount } = this.state;
     const money = (+baseTotal)
 
-    console.log(baseTotal, money, tipAmount, money)
+    // console.log(baseTotal, money, tipAmount, money)
 
     if (isNaN(money)) {
       return;
     }
 
-    calculatedGratuity = App.round(money * (tipAmount * 0.01))
-    calculatedTotal = App.round(money + calculatedGratuity)
+    const calculatedGratuity = App.round(money * (tipAmount * 0.01))
+    const calculatedTotal = App.round(money + calculatedGratuity)
 
-    console.log(baseTotal, tipAmount, calculatedGratuity)
+    // console.log(calculatedGratuity, calculatedTotal)
 
     this.setState({
       calculatedGratuity,
@@ -73,8 +69,12 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fcfcfc',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  estimateContainer: {
+    flexDirection: 'row',
+    width: '80%'
+  }
 });
