@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import BaseTotal from './App/Components/BaseTotal'
 import TipSlider from './App/Components/TipSlider'
 import Estimate from './App/Components/Estimate'
@@ -22,10 +22,8 @@ export default class App extends React.Component {
         <TipSlider onValueChange={this.onSlider} tip={this.state.tipAmount} />
 
         <View style={styles.estimateContainer}>
-
           <Estimate name="Gratuity" value={this.state.calculatedGratuity} />
           <Estimate name="Total" value={this.state.calculatedTotal} />
-
         </View>
       </View>
     );
@@ -42,6 +40,14 @@ export default class App extends React.Component {
     // console.log(baseTotal, money, tipAmount, money)
 
     if (isNaN(money)) {
+      Alert.alert(
+        'Warning',
+        'Please enter a valid number',
+        [
+          { text: 'OK', onPress: () => this.setState({ baseTotal: '' }) },
+        ],
+        { cancelable: false }
+      )
       return;
     }
 
