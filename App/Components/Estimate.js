@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class Estimate extends Component {
     render() {
+        let { value } = this.props
+
+        value = !isNaN(+value) ? (+value).toFixed(2) : value
         return (
-            <View style={{
-                flex: 1,
-                alignItems: 'center',
-                alignContent: 'center',
-            }}>
+            <View style={styles.container}>
                 <Text>{this.props.name}</Text>
-                <Text style={{ fontSize: 22, alignSelf: 'center' }}>{this.props.value}</Text>
+                <Text style={styles.value}>{value}</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    value: {
+        fontSize: 24,
+        alignSelf: 'center'
+    }
+});
