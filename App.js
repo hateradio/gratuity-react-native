@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import BaseTotal from './App/Components/BaseTotal'
 import TipSlider from './App/Components/TipSlider'
 import Estimate from './App/Components/Estimate'
@@ -18,6 +18,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={require('./App/Images/pizza.png')} style={styles.pizza} />
         <BaseTotal onChangeText={this.onInput} value={`${this.state.baseTotal}`}></BaseTotal>
         <TipSlider onValueChange={this.onSlider} tip={this.state.tipAmount} />
 
@@ -78,6 +79,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfcfc',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pizza: {
+    width: 200,
+    height: 200
   },
   estimateContainer: {
     flexDirection: 'row',
