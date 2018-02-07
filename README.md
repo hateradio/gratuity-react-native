@@ -1,0 +1,1 @@
+Gratuity Calculator built with React Native
